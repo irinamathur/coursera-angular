@@ -23,29 +23,41 @@ function FoundItems() {
   return ddo;
 }
 
+
 NarrowItDownController.$inject = ['MenuSearchService'];
 function NarrowItDownController(MenuSearchService) {
   var menu = this;
 
   menu.searchTerm = "";
   menu.foundItems = [];
+  menu.message = "";
 
   menu.getMatchedMenuItems = function () {
-    var promise = MenuSearchService.getMatchedMenuItems(menu.searchTerm);
+    menu.message = "";
+    if (menu.searchTerm.trim() === "") {
+      console.log("ehr");
+      menu.message = 'Nothing found';
+    } else {
+      console.log("promise");
+      var promise = MenuSearchService.getMatchedMenuItems(menu.searchTerm);
 
-    promise.then(function (foundItems) {
-      menu.foundItems = foundItems;
-      console.log(menu.foundItems);
-    })
-    .catch(function (error) {
-      console.log(error);
-    })
+      promise.then(function (foundItems) {
+        menu.foundItems = foundItems;
+        if (menu.foundItems.length === 0) {
+            menu.message = 'Nothing found';
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+    }
   };
 
   menu.removeItem = function (itemIndex) {
     MenuSearchService.removeItem(itemIndex);
     menu.foundItems = MenuSearchService.getFoundItems();
   };
+
 
 }
 
@@ -63,6 +75,7 @@ function MenuSearchService($http, ApiBasePath) {
       url: (ApiBasePath + "/menu_items.json")
     }).then(function (response) {
       var obj = response.data;
+      foundItems = [];
       for (var key in obj) {
         if (obj.hasOwnProperty(key)) {
           var val = obj[key];
@@ -74,16 +87,18 @@ function MenuSearchService($http, ApiBasePath) {
               //console.log(menuItems[item]);
               var desc = menuItems[item].description;
               var name = menuItems[item].name;
+              var shortName = menuItems[item].short_name;
               var fItems = {
                 "name": name,
-                "description": desc
+                "description": desc,
+                "shortName": shortName
               }
               if (desc.toLowerCase().includes(searchTerm.toLowerCase())) {
                 foundItems.push(fItems);
               }
-              if (name.toLowerCase().includes(searchTerm.toLowerCase())) {
-                foundItems.push(fItems);
-              }
+              // if (name.toLowerCase().includes(searchTerm.toLowerCase())) {
+              //   foundItems.push(fItems);
+              // }
             }
           }
         }

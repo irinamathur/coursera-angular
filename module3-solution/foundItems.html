@@ -1,6 +1,6 @@
 <ol>
   <li ng-repeat="item in menu.found track by $index">
-    {{ item.name }}
+    {{ item.name }} ({{item.shortName}}): {{item.description}}
     <button ng-click="menu.onRemove({index: $index});">Don't want this one!</button>
   </li>
   <br/>
