@@ -1,0 +1,5 @@
+<div ng-repeat="item in $ctrl.categories">
+  <a class="paddingCls" ui-sref="items({itemsCategory: item.short_name })">
+    {{ item.name }}
+  </a>
+</div>
