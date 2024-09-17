@@ -10,6 +10,7 @@ function MenuService($http, ApiPath) {
   var service = this;
 
   service.favMenuItem = null;
+  service.user = null;
 
   service.getCategories = function () {
     return $http.get(ApiPath + '/categories.json').then(function (response) {
@@ -26,7 +27,7 @@ function MenuService($http, ApiPath) {
 
 
   service.getMenuItem = function (short_name) {
-    var num = short_name.match(/\d+/)[0];
+    var num = short_name.replace(/[a-z]/gi, '');
     var alpha = short_name.replace(/[^a-z]/gi, '');
     var url1 = ApiPath + '/menu_items/' + alpha + '/menu_items/' + num + '.json';
     console.log(url1);
@@ -36,14 +37,23 @@ function MenuService($http, ApiPath) {
     });
   };
 
-  service.saveMenuItem = function (menuItem) {
-    console.log(menuItem);
+  service.saveMenuItem = function (menuItem, user) {
+    console.log(menuItem, user);
       service.favMenuItem = menuItem;
+      service.user = user;
   };
 
-  service.getSavedMenuItem = function (menuItem) {
-      return service.favMenuItem;
+  service.getSavedMenuItem = function () {
+    var details = {
+      "user": service.user,
+      "favMenuItem": service.favMenuItem
+    }
+      return details;
   };
+
+  // service.getSavedMenuItem = function (menuItem) {
+  //     return service.favMenuItem;
+  // };
 
 }
 

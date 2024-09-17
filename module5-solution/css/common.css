@@ -18,3 +18,9 @@
 .ui-view-placeholder {
     margin-top: 60px;
 }
+
+.mini {
+  font-size: 11px;
+  margin-left: 75px;
+  margin-top: -10px;
+}

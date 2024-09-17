@@ -8,8 +8,11 @@ LoginController.$inject = ['favMenuItem'];
 function LoginController(favMenuItem) {
   var $ctrl = this;
   console.log("LoginCtrl" , favMenuItem);
-  this.favMenuItem = favMenuItem;
-  this.catShortName = favMenuItem.short_name.replace(/[^a-z]/gi, '');
+  this.user = favMenuItem.user;
+  if (favMenuItem.favMenuItem != null) {
+    this.favMenuItem = favMenuItem.favMenuItem;
+    this.catShortName = favMenuItem.favMenuItem.short_name.replace(/[^a-z]/gi, '');
+  }
 }
 
 

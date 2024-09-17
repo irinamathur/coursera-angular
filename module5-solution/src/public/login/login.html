@@ -1,12 +1,13 @@
 <ui-view>
     <div class="container">
     <h1>Profile</h1>
-
-    <p>Favorite menu item</p>
+    <p>Welcome {{loginCtrl.user.firstname}} {{loginCtrl.user.lastname}}</p>
+    <p class="mini">{{loginCtrl.user.email}} {{loginCtrl.user.phone}}</p>
     <div class="alert alert-danger" ng-if="loginCtrl.favMenuItem == null">
      Not Signed Up Yet. <a href="#/auth">Sign up Now!</a>
     </div>
     <div ng-if="loginCtrl.favMenuItem != null">
+        <p>Favorite menu item</p>
         <menu-item menu-item="loginCtrl.favMenuItem"
                    category-short-name="loginCtrl.catShortName">
         </menu-item>
