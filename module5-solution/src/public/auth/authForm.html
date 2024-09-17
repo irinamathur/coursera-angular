@@ -1,0 +1,86 @@
+
+<ui-view>
+    <div class="form-group container">
+    <h1>Newsletter Signup</h1>
+
+    <p>Subscribe to our newsletter!</p>
+    <fieldset>
+      <p>Registration</p>
+      <form name='authForm' novalidate>
+
+        <!-- <input type="text" class="form-control" name="firstname" placeholder="First Name"
+          ng-model="authCtrl.user.firstname"
+          required
+          minlength="3"
+          ng-maxlength="10">
+          <span
+            ng-if="(authForm.firstname.$error.minlength || authForm.firstname.$error.required) && authForm.firstname.$touched">
+            First Name must be at least 3 characters long
+          </span>
+          <span ng-if="authForm.firstname.$error.maxlength && authForm.firstname.$touched">
+            First Name must not be longer than 10 characters
+          </span>
+          <br>
+
+      <input type="text" class="form-control" name="lastname" placeholder="Last Name"
+        ng-model="authCtrl.user.lastname"
+        required
+        minlength="3"
+        ng-maxlength="10">
+        <span
+          ng-if="(authForm.lastname.$error.minlength || authForm.lastname.$error.required) && authForm.lastname.$touched">
+          Last Name must be at least 3 characters long
+        </span>
+        <span ng-if="authForm.lastname.$error.maxlength && authForm.lastname.$touched">
+          Last Name must not be longer than 10 characters
+        </span>
+        <br> -->
+
+        <input type="text" class="form-control" name="short_name" placeholder="Menu Item"
+          ng-model="authCtrl.menu.short_name"
+          required
+          ng-maxlength="10">
+          <span
+            ng-if="(authForm.short_name.$error.required) && authForm.short_name.$touched">
+            The field is required.
+          </span>
+          <span ng-if="authForm.short_name.$error.maxlength && authForm.short_name.$touched">
+            Menu Item Name must not be longer than 10 characters
+          </span>
+
+          <br>
+
+        <!-- <input type="email" class="form-control" name="email" placeholder="Email"
+          ng-model="authCtrl.user.email"
+          required>
+          <span ng-if="authForm.email.$invalid && authForm.email.$touched">
+            Must be a valid email address.
+          </span>
+          <br>
+
+        <input type="text" class="form-control" name="phone" placeholder="Phone ###-###-####"
+          ng-model="authCtrl.user.phone"
+          pattern="(\d{3})-(\d{3})-(\d{4})">
+          <span ng-if="authForm.phone.$invalid && authForm.phone.$touched">
+            Phone must be in the format ###-###-####.
+          </span>
+          <br> -->
+
+        <button type="submit" class="btn btn-default"
+          ng-disabled="authForm.$invalid"
+          ng-click="authCtrl.submit()">Submit</button>
+
+          <div style="margin-top: 10px;">
+            Form valid? {{ authForm.$valid }}
+          </div>
+      </form>
+    </fieldset>
+
+    <div class="alert alert-success" ng-if="authCtrl.successMsg != ''">
+    <b>Success!</b> {{authCtrl.successMsg}}.
+  </div>
+    <div class="alert alert-danger" ng-if="authCtrl.errorMsg != ''">
+        <b>Error!</b> {{authCtrl.errorMsg}}.
+    </div>
+</div>
+</ui-view>

@@ -1,0 +1,15 @@
+<ui-view>
+    <div class="container">
+    <h1>Profile</h1>
+
+    <p>Favorite menu item</p>
+    <div class="alert alert-danger" ng-if="loginCtrl.favMenuItem == null">
+     Not Signed Up Yet. <a href="#/auth">Sign up Now!</a>
+    </div>
+    <div ng-if="loginCtrl.favMenuItem != null">
+        <menu-item menu-item="loginCtrl.favMenuItem"
+                   category-short-name="loginCtrl.catShortName">
+        </menu-item>
+    </div>
+</div>
+</ui-view>
